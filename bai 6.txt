@@ -1,0 +1,64 @@
+## Bản đặc tả Không gian Cộng tác: Dự án "Trang trại thông minh (Green-Tech)"
+
+---
+
+### PHẦN 1: BẢN ĐẶC TẢ KHÔNG GIAN CỘNG TÁC (README.md)
+
+```markdown
+# GREEN-TECH PROJECT - ENTERPRISE COLLABORATION & WORKSPACE SPECIFICATION
+
+## 1. Cấu trúc Thư mục Lưu trữ (Hybrid Workflow & Storage)
+Thư mục dự án được đồng bộ hóa qua Cloud Storage với tính năng Files On-Demand và bảo mật tuyệt đối.
+- Root Folder: `D:\Green-Tech_Smart_Farm\`
+  ├── `01-Sensor-Code/`                 --> Lưu mã nguồn cảm biến (Arduino/ESP32/Python)
+  │   ├── `src/`
+  │   └── `.env`                        --> [BẢO MẬT] Chứa mật khẩu, API Key (Cấm chia sẻ/Không commit lên Git)
+  ├── `02-Investor-Reports/`            --> Báo cáo tiến độ và tài chính định kỳ cho Nhà đầu tư
+  ├── `03-Hardware-Specs/`              --> Tài liệu kỹ thuật từ Đối tác cung cấp thiết bị
+  └── `README.md`
+
+```
+
+## 2. Cấu trúc Kênh Giao tiếp (Enterprise Channels)
+
+Tổ chức trên Slack / Lark để loại bỏ trôi tin nhắn và áp dụng giao tiếp bất đồng bộ:
+
+* `#00-announcement`: Thông báo chung, mốc milestone, lịch release (Chỉ Admin đăng bài).
+* `#01-dev-iot-sensors`: Thảo luận kỹ thuật phần cứng, lập trình mã nguồn cảm biến.
+* `#02-investor-updates`: Cập nhật tình hình kinh doanh, báo cáo tài chính.
+* `#99-random-coffee`: Kênh giải trí, xả stress của nội bộ nhóm.
+
+## 3. Quy định Phân quyền & Quản lý Vòng đời (Permissions Matrix)
+
+| Tài nguyên / Thư mục | Đối tượng | Mức quyền hạn | Ghi chú & Bảo mật |
+| --- | --- | --- | --- |
+| **`01-Sensor-Code`** | Đội ngũ Dev | Editor (Suggesting Mode) | Đồng bộ qua Hybrid Workflow cá nhân. |
+| **`02-Investor-Reports`** | Nhà đầu tư | **Viewer (Chỉ xem)** | Chặn quyền Download/Copy để bảo mật số liệu. |
+| **`03-Hardware-Specs`** | Đối tác thiết bị | **Commenter** | Được phép bình luận góp ý thông số kỹ thuật. |
+| **Toàn bộ Workspace** | Bàn giao (Offboarding) | **Transfer Ownership** | Chuyển quyền sở hữu gốc cho giảng viên/trưởng nhóm mới khi kết thúc. |
+
+```
+
+---
+
+### PHẦN 2: KỊCH BẢN KIỂM THỬ VÀ KHÔI PHỤC DỮ LIỆU SỰ CỐ
+
+Khi một thành viên lỡ tay xóa sạch folder `sensors` (hoặc `01-Sensor-Code`) trên máy tính cá nhân, hệ thống cho phép khôi phục tức thời nhờ sự kết hợp giữa **Cloud Version History** và **Trash Bin**.
+
+#### Quy trình khôi phục nhanh nhất (3 Bước):
+
+<Steps>
+  <Step subtitle="Khôi phục từ Thùng rác đám mây" title="Bước 1: Khôi phục cấu trúc thư mục gốc từ Cloud Trash">
+    Truy cập vào trang quản trị web của dịch vụ Cloud (Google Drive / OneDrive) $\rightarrow$ Vào mục **Trash (Thùng rác)** $\rightarrow$ Tìm thư mục `01-Sensor-Code` vừa bị xóa nhầm $\rightarrow$ Nhấn chuột phải chọn **Restore (Khôi phục)**.
+    *Kết quả:* Toàn bộ cây thư mục và cấu trúc code bên trong lập tức quay trở lại vị trí ban đầu trên đám mây và tự động đồng bộ xuống máy tính các thành viên thông qua Sync Engine.
+  </Step>
+  <Step subtitle="Kiểm tra an toàn file nhạy cảm" title="Bước 2: Xác thực file bảo mật (.env)">
+    Kiểm tra lại thư mục `01-Sensor-Code/` vừa khôi phục để đảm bảo tệp chứa mật khẩu cảm biến (`.env`) vẫn còn nguyên vẹn. 
+    *Lưu ý bảo mật:* Tệp `.env` không được lưu trên các nhánh chia sẻ công khai mà chỉ nằm cục bộ trên thiết bị của Dev hoặc được mã hóa trong trình quản lý mật khẩu, đảm bảo không bị rò rỉ quyền truy cập.
+  </Step>
+  <Step subtitle="Kiểm tra tính toàn vẹn mã nguồn" title="Bước 3: Đồng bộ và kiểm thử phiên bản (Rollback Test)">
+    Mở môi trường lập trình (VS Code) tại máy của các thành viên, chạy lệnh `git status` hoặc kiểm tra trạng thái **Files On-Demand** trên thanh công cụ để đảm bảo không có xung đột phiên bản (Conflict Copy) nào phát sinh sau khi khôi phục.
+  </Step>
+</Steps>
+
+```
